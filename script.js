@@ -1,5 +1,5 @@
 const CONFIG = {
-    personName: 'My Favorite Person',
+    personName: 'CUTIE',
     senderName: 'Somesh',
     birthdayISO: '2026-08-18T00:00:00+05:30',
     passcode: '18AUG2012'
@@ -13,6 +13,8 @@ const envelopeButton = document.getElementById('envelopeButton');
 const letterCard = document.getElementById('letterCard');
 const revealButton = document.getElementById('revealButton');
 const continueButton = document.getElementById('continueButton');
+const momentsCard = document.getElementById('momentsCard');
+const momentsContinueButton = document.getElementById('momentsContinueButton');
 const nextNoteButton = document.getElementById('nextNoteButton');
 const shyYesButton = document.getElementById('shyYesButton');
 const whyButton = document.getElementById('whyButton');
@@ -45,6 +47,7 @@ const passwordGate = document.getElementById('passwordGate');
 const celebrationPassword = document.getElementById('celebrationPassword');
 const passwordMessage = document.getElementById('passwordMessage');
 const sparkLayer = document.getElementById('sparkLayer');
+const heartRainLayer = document.getElementById('heartRainLayer');
 
 const colors = ['#ff6f79', '#ffb47e', '#60d6d1', '#ffe082', '#ffffff'];
 const countdownTarget = new Date(CONFIG.birthdayISO).getTime();
@@ -57,19 +60,19 @@ let loveTimerId = null;
 const notes = [
     {
         title: 'A tiny confession',
-        text: 'You are the kind of person who makes even ordinary days feel decorated.'
+        text: 'You are not just cute. You are dangerously cute, the kind that makes my brain forget what it was doing.'
     },
     {
         title: 'Your smile is trouble',
-        text: 'It is cute, it is powerful, and it should probably come with a warning label.'
+        text: 'Your smile should come with a warning, because one look and suddenly my whole day starts behaving better.'
+    },
+    {
+        title: 'Your eyes win',
+        text: 'The way you look at me says more than a thousand messages. It feels calm, soft, and impossible to forget.'
     },
     {
         title: 'Birthday rule',
-        text: 'Today you are allowed to be spoiled, complimented, adored, and treated like the main character.'
-    },
-    {
-        title: 'One more thing',
-        text: 'I hope this page makes you feel a little loved, because it was made with a ridiculous amount of feeling.'
+        text: 'Today you are allowed to be spoiled, complimented, adored, and treated like the prettiest main character.'
     }
 ];
 
@@ -169,7 +172,7 @@ function pauseMusic() {
 }
 
 function typeGreeting() {
-    const message = 'Happy Birthday';
+    const message = `Happy Birthday ${CONFIG.personName}`;
     let index = 0;
     typedGreeting.textContent = '';
 
@@ -198,8 +201,24 @@ function makeHeartSparks(amount = 8) {
     }
 }
 
+function makeHeartRain(amount = 22) {
+    if (!heartRainLayer) return;
+
+    for (let i = 0; i < amount; i += 1) {
+        const heart = document.createElement('span');
+        heart.className = 'rain-heart';
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.color = colors[i % colors.length];
+        heart.style.animationDelay = `${Math.random() * 1.2}s`;
+        heart.style.animationDuration = `${3.8 + Math.random() * 3.4}s`;
+        heart.style.width = `${13 + Math.random() * 18}px`;
+        heartRainLayer.appendChild(heart);
+        window.setTimeout(() => heart.remove(), 8200);
+    }
+}
+
 function getActiveStage() {
-    return document.querySelector('.step.active .celebration-stage, .step.active .note-card, .step.active .flirt-card, .step.active .love-card, .step.active .final-card');
+    return document.querySelector('.step.active .celebration-stage, .step.active .moments-card, .step.active .note-card, .step.active .flirt-card, .step.active .love-card, .step.active .final-card');
 }
 
 function makeFloatingHearts(amount = 20) {
@@ -255,12 +274,14 @@ function startCelebrationEffects() {
     stopCelebrationEffects();
     typeGreeting();
     makeHeartSparks(24);
+    makeHeartRain(48);
     makeFloatingHearts(38);
     launchRibbons(90);
     launchBursts(10);
 
     celebrationTimerIds = [
         window.setInterval(() => makeHeartSparks(8), 2500),
+        window.setInterval(() => makeHeartRain(16), 1800),
         window.setInterval(() => makeFloatingHearts(12), 2800),
         window.setInterval(() => launchRibbons(24), 4200),
         window.setInterval(() => launchBursts(4), 5200)
@@ -283,6 +304,7 @@ function renderNote() {
     void noteCard.offsetWidth;
     noteCard.classList.add('note-enter');
     makeHeartSparks(12);
+    makeHeartRain(12);
     makeFloatingHearts(18);
 }
 
@@ -305,6 +327,7 @@ function showFlirtAnswer() {
     flirtActions.classList.add('is-hidden');
     flirtAnswer.classList.add('is-visible');
     makeHeartSparks(16);
+    makeHeartRain(18);
     makeFloatingHearts(24);
 }
 
@@ -319,9 +342,11 @@ function moveShyButton() {
 function startLoveLoop() {
     if (loveTimerId) window.clearInterval(loveTimerId);
     makeHeartSparks(34);
+    makeHeartRain(44);
     makeFloatingHearts(48);
     loveTimerId = window.setInterval(() => {
         makeHeartSparks(12);
+        makeHeartRain(14);
         makeFloatingHearts(18);
     }, 2100);
 }
@@ -337,6 +362,7 @@ startButton.addEventListener('click', () => {
     playMusic();
     showStep('stepEnvelope');
     makeHeartSparks(18);
+    makeHeartRain(18);
 });
 
 celebrationPassword.addEventListener('keydown', (event) => {
@@ -346,6 +372,7 @@ celebrationPassword.addEventListener('keydown', (event) => {
 envelopeButton.addEventListener('click', () => {
     envelopeButton.classList.add('open');
     makeHeartSparks(16);
+    makeHeartRain(18);
 
     window.setTimeout(() => {
         showStep('stepLetter');
@@ -361,6 +388,14 @@ revealButton.addEventListener('click', () => {
 });
 
 continueButton.addEventListener('click', () => {
+    showStep('stepMoments');
+    momentsCard.classList.add('note-enter');
+    makeHeartSparks(24);
+    makeHeartRain(32);
+    makeFloatingHearts(24);
+});
+
+momentsContinueButton.addEventListener('click', () => {
     noteIndex = 0;
     showStep('stepNotes');
     renderNote();
@@ -397,6 +432,7 @@ flirtContinueButton.addEventListener('click', () => {
 
     showStep('stepLoveQuestion');
     makeHeartSparks(26);
+    makeHeartRain(28);
     makeFloatingHearts(28);
 });
 
@@ -408,6 +444,7 @@ loveYesButton.addEventListener('click', () => {
 loveNoButton.addEventListener('click', () => {
     showStep('stepTease');
     makeHeartSparks(22);
+    makeHeartRain(24);
     makeFloatingHearts(24);
 });
 
@@ -421,6 +458,7 @@ loveContinueButton.addEventListener('click', () => {
     stopCelebrationEffects();
     showStep('stepFinal');
     makeHeartSparks(30);
+    makeHeartRain(30);
     makeFloatingHearts(30);
 });
 
