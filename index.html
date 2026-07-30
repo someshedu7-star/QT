@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Birthday Love Surprise</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="Perfect.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="ambient-layer" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="spark-layer" id="sparkLayer" aria-hidden="true"></div>
+
+    <button id="musicToggle" class="music-toggle" type="button" aria-label="Toggle music">
+        <span class="music-dot"></span>
+        <span id="musicLabel">Music Off</span>
+    </button>
+
+    <main>
+        <section class="step active" id="stepIntro">
+            <div class="glass-card intro-card">
+                <p class="eyebrow">A birthday page made with extra feelings</p>
+                <h1>For <span data-person-name>My Favorite Person</span></h1>
+                <p class="lead">I changed the whole sky just to make this surprise feel new for you.</p>
+
+                <div class="countdown-card" aria-label="Birthday countdown">
+                    <p id="countdownTitle">Counting every little second</p>
+                    <div class="countdown-grid">
+                        <span><strong id="countDays">00</strong><small>Days</small></span>
+                        <span><strong id="countHours">00</strong><small>Hours</small></span>
+                        <span><strong id="countMinutes">00</strong><small>Min</small></span>
+                        <span><strong id="countSeconds">00</strong><small>Sec</small></span>
+                    </div>
+                </div>
+
+                <div class="password-gate" id="passwordGate">
+                    <label for="celebrationPassword">Secret passcode before the birthday</label>
+                    <input id="celebrationPassword" type="password" autocomplete="off" placeholder="Enter secret code">
+                    <p id="passwordMessage" aria-live="polite"></p>
+                </div>
+
+                <button id="startButton" class="primary-button" type="button">Open My Heart</button>
+            </div>
+        </section>
+
+        <section class="step" id="stepEnvelope">
+            <button class="envelope-button" id="envelopeButton" type="button" aria-label="Open love envelope">
+                <span class="envelope">
+                    <span class="envelope-back"></span>
+                    <span class="envelope-paper"></span>
+                    <span class="envelope-front"></span>
+                    <span class="envelope-flap"></span>
+                    <span class="seal"></span>
+                </span>
+                <span class="tap-hint">Tap the little love letter</span>
+            </button>
+        </section>
+
+        <section class="step" id="stepLetter">
+            <article class="letter-card" id="letterCard">
+                <p class="letter-to">Dear <span data-person-name>My Favorite Person</span>,</p>
+                <p>I could have sent a normal birthday wish, but normal is too small for someone who makes my heart act this dramatic.</p>
+                <p>So here is a whole tiny world: soft colors, flirty notes, fireworks, photos, and a lot of love pretending to be code.</p>
+                <button id="revealButton" class="primary-button" type="button">Make It Sparkle</button>
+            </article>
+        </section>
+
+        <section class="step" id="stepCelebrate">
+            <div class="celebration-stage">
+                <div class="burst-layer"></div>
+                <div class="ribbon-layer"></div>
+                <div class="floating-layer"></div>
+
+                <article class="glass-card celebration-card">
+                    <p class="eyebrow">Today belongs to you</p>
+                    <h2 id="typedGreeting" class="typed-title">Happy Birthday</h2>
+                    <p class="name-line" data-person-name>My Favorite Person</p>
+
+                    <div class="cake-wrap" aria-hidden="true">
+                        <div class="cake">
+                            <span class="plate"></span>
+                            <span class="cake-base"></span>
+                            <span class="cake-mid"></span>
+                            <span class="cake-top"></span>
+                            <span class="candle"></span>
+                            <span class="flame"></span>
+                        </div>
+                    </div>
+
+                    <p class="wish-copy">May your birthday feel like warm hands, loud laughter, pretty photos, sweet cake, and messages that make you blush when nobody is watching.</p>
+
+                    <div class="photo-gallery" aria-label="Photo memories">
+                        <figure>
+                            <img src="photo1.jpg" alt="Birthday memory one">
+                            <figcaption>That smile</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="photo2.jpg" alt="Birthday memory two">
+                            <figcaption>Too cute</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="photo3.jpg" alt="Birthday memory three">
+                            <figcaption>My favorite view</figcaption>
+                        </figure>
+                    </div>
+
+                    <button id="continueButton" class="primary-button" type="button">More Love</button>
+                </article>
+            </div>
+        </section>
+
+        <section class="step" id="stepNotes">
+            <article class="note-card" id="noteCard">
+                <p class="eyebrow" id="noteCount">Note 1 of 4</p>
+                <h2 id="noteTitle">A tiny confession</h2>
+                <p id="noteText">You are the kind of person who makes even ordinary days feel decorated.</p>
+                <button id="nextNoteButton" class="primary-button" type="button">Next Flirty Note</button>
+            </article>
+        </section>
+
+        <section class="step" id="stepFlirt">
+            <article class="flirt-card" id="flirtCard">
+                <p class="eyebrow" id="flirtCount">Question 1 of 3</p>
+                <h2 id="flirtQuestion">Are you made of moonlight?</h2>
+                <div class="flirt-actions" id="flirtActions">
+                    <button id="shyYesButton" class="primary-button shy-button" type="button">Maybe</button>
+                    <button id="whyButton" class="secondary-button" type="button">Why?</button>
+                </div>
+                <div class="flirt-answer" id="flirtAnswer">
+                    <p id="flirtAnswerText">Because you make everything softer just by being there.</p>
+                    <button id="flirtContinueButton" class="primary-button" type="button">Next Question</button>
+                </div>
+            </article>
+        </section>
+
+        <section class="step" id="stepLoveQuestion">
+            <article class="love-card">
+                <p class="eyebrow">One important question</p>
+                <h2>Will you keep this smile for me today?</h2>
+                <div class="love-actions">
+                    <button id="loveYesButton" class="primary-button" type="button">Yes, obviously</button>
+                    <button id="loveNoButton" class="secondary-button" type="button">Make me</button>
+                </div>
+            </article>
+        </section>
+
+        <section class="step" id="stepLoveYes">
+            <article class="love-card final-love-card">
+                <p class="eyebrow">That is my favorite answer</p>
+                <h2>You look perfect in happiness.</h2>
+                <p>Now accept this dramatic amount of love, because I worked too hard to act casual.</p>
+                <button id="loveContinueButton" class="primary-button" type="button">Final Wish</button>
+            </article>
+        </section>
+
+        <section class="step" id="stepTease">
+            <article class="love-card">
+                <p class="eyebrow">Challenge accepted</p>
+                <h2>Then I am sending extra compliments.</h2>
+                <p id="teaseText">Your smile is unfair. Your vibe is dangerous. Your birthday should honestly be a national event.</p>
+                <button id="teaseButton" class="primary-button" type="button">Okay, I smiled</button>
+            </article>
+        </section>
+
+        <section class="step" id="stepFinal">
+            <article class="glass-card final-card">
+                <p class="eyebrow">Wishes from</p>
+                <h2 id="senderName">Someone who adores you</h2>
+                <p>May this year bring you soft mornings, brave dreams, pretty surprises, loyal people, and the kind of love that never makes you doubt your worth.</p>
+                <button id="replayButton" class="primary-button" type="button">Replay Surprise</button>
+            </article>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
