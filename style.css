@@ -676,16 +676,22 @@ h1 {
 .memory-photo-tile {
     position: relative;
     z-index: 2;
-    width: min(100%, 460px);
-    aspect-ratio: 16 / 9;
+
+    /* Image Box Size */
+    width: min(100%, 640px);
+    aspect-ratio: 640 / 685;
+
     margin: 10px auto 20px;
     overflow: hidden;
+
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 18px;
+
     background:
         radial-gradient(circle at 28% 18%, rgba(255, 224, 130, 0.26), transparent 32%),
         linear-gradient(135deg, rgba(96, 214, 209, 0.26), rgba(255, 111, 121, 0.28)),
         rgba(255, 255, 255, 0.12);
+
     box-shadow: 0 18px 42px rgba(0, 0, 0, 0.26);
 }
 
@@ -693,6 +699,8 @@ h1 {
     width: 100%;
     height: 100%;
     display: block;
+
+    /* Change to 'contain' if you don't want any cropping */
     object-fit: cover;
 }
 
@@ -701,12 +709,13 @@ h1 {
 }
 
 .memory-photo-tile::before {
-    content: 'Add photo.jpg here';
+    content: "Add photo.jpg here";
     position: absolute;
     inset: 0;
     display: grid;
     place-items: center;
     padding-bottom: 36px;
+
     color: rgba(255, 255, 255, 0.78);
     font-size: 0.9rem;
     font-weight: 800;
@@ -715,7 +724,7 @@ h1 {
 }
 
 .memory-photo-tile.has-photo::before {
-    content: '';
+    content: "";
 }
 
 .memory-photo-tile figcaption {
@@ -723,18 +732,21 @@ h1 {
     left: 12px;
     right: 12px;
     bottom: 12px;
+
     min-height: 38px;
     display: grid;
     place-items: center;
+
     border: 1px solid rgba(255, 255, 255, 0.28);
     border-radius: 999px;
+
     color: var(--cream);
     background: rgba(23, 20, 38, 0.58);
     backdrop-filter: blur(12px);
+
     font-weight: 800;
     text-align: center;
 }
-
 .note-card,
 .flirt-card,
 .love-card,
