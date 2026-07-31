@@ -48,12 +48,14 @@ const celebrationPassword = document.getElementById('celebrationPassword');
 const passwordMessage = document.getElementById('passwordMessage');
 const sparkLayer = document.getElementById('sparkLayer');
 const heartRainLayer = document.getElementById('heartRainLayer');
+const memoryPhotoTile = document.querySelector('.memory-photo-tile');
+const memoryPhoto = document.querySelector('.memory-photo-tile img');
 
 const colors = ['#ff6f79', '#ffb47e', '#60d6d1', '#ffe082', '#ffffff'];
 const countdownTarget = new Date(CONFIG.birthdayISO).getTime();
 let noteIndex = 0;
 let flirtIndex = 0;
-let musicWanted = false;
+let musicWanted = true;
 let celebrationTimerIds = [];
 let loveTimerId = null;
 
@@ -166,8 +168,8 @@ function pauseMusic() {
     if (!backgroundMusic) return;
 
     backgroundMusic.pause();
-    musicWanted = false;
-    musicLabel.textContent = 'Music Off';
+    musicWanted = true;
+    musicLabel.textContent = 'Music Paused';
     musicToggle.classList.remove('is-playing');
 }
 
@@ -377,13 +379,13 @@ envelopeButton.addEventListener('click', () => {
     window.setTimeout(() => {
         showStep('stepLetter');
         letterCard.classList.add('note-enter');
-        if (musicWanted) playMusic();
+        playMusic();
     }, 650);
 });
 
 revealButton.addEventListener('click', () => {
     showStep('stepCelebrate');
-    if (musicWanted) playMusic();
+    playMusic();
     startCelebrationEffects();
 });
 
@@ -469,13 +471,26 @@ replayButton.addEventListener('click', () => {
 });
 
 musicToggle.addEventListener('click', () => {
-    if (backgroundMusic.paused) {
-        playMusic();
-    } else {
-        pauseMusic();
-    }
+    playMusic();
 });
+
+if (memoryPhoto && memoryPhotoTile) {
+    memoryPhoto.addEventListener('load', () => {
+        memoryPhoto.classList.remove('is-missing');
+        memoryPhotoTile.classList.add('has-photo');
+    });
+
+    memoryPhoto.addEventListener('error', () => {
+        memoryPhoto.classList.add('is-missing');
+        memoryPhotoTile.classList.remove('has-photo');
+    });
+
+    if (memoryPhoto.complete && memoryPhoto.naturalWidth > 0) {
+        memoryPhotoTile.classList.add('has-photo');
+    }
+}
 
 initNames();
 updateCountdown();
+playMusic();
 window.setInterval(updateCountdown, 1000);
